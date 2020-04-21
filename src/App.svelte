@@ -1,6 +1,14 @@
 <script>
   import Product from "./Product.svelte";
 
+  let products = [
+    {
+      id: "p1",
+      title: "A Book",
+      price: 9.99
+    }
+  ];
+
   const addToCart = event => {
     console.log(event);
   };
@@ -10,7 +18,11 @@
   };
 </script>
 
-<Product
-  productTitle="A Book"
-  on:add-to-cart={addToCart}
-  on:delete={deleteProduct} />
+<!-- title={product.title}
+    price={product.price}
+		another way to write the above props down to display them is:
+		{...products} -->
+
+{#each products as product}
+  <Product {...product} on:add-to-cart={addToCart} on:delete={deleteProduct} />
+{/each}
