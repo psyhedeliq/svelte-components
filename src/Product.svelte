@@ -6,12 +6,12 @@
   const dispatch = createEventDispatcher();
 
   const addToCart = () => {
-    dispatch("add-to-cart");
+    dispatch("add-to-cart", { id: "p1" });
   };
 </script>
 
 <article>
   <h1>{productTitle}</h1>
   <button on:click={addToCart}>Add to cart</button>
-  <button on:click={() => dispatch('delete')}>Delete</button>
+  <button on:click={() => dispatch('delete', 'p1')}>Delete</button>
 </article>
