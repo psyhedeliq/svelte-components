@@ -4,6 +4,7 @@
   const dispatch = createEventDispatcher();
 
   // export let content;
+  let agreed = false;
 
   const cancelModal = () => {
     dispatch("cancel");
@@ -11,6 +12,10 @@
 
   const closeModal = () => {
     dispatch("close");
+  };
+
+  const agreeToTerms = () => {
+    agreed = true;
   };
 </script>
 
@@ -52,9 +57,13 @@
   <div class="content">
     <slot />
   </div>
+  <div class="disclaimer">
+    <p>Before you close, you need to agree to our terms!</p>
+    <button on:click={agreeToTerms}>Agree</button>
+  </div>
   <footer>
-    <slot name="footer">
-      <button on:click={closeModal}>Close</button>
+    <slot name="footer" didAgree={agreed}>
+      <button on:click={closeModal} disabled={!agreed}>Close</button>
     </slot>
   </footer>
 </div>
