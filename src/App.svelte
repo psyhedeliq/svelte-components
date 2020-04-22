@@ -10,12 +10,26 @@
     }
   ];
 
+  let showModal = false;
+
   const addToCart = event => {
     console.log(event);
   };
 
   const deleteProduct = event => {
     console.log(event.detail);
+  };
+
+  const showModalOnScreen = () => {
+    showModal = true;
+  };
+
+  const cancelModal = () => {
+    showModal = false;
+  };
+
+  const closeModal = () => {
+    showModal = false;
   };
 </script>
 
@@ -28,8 +42,12 @@
   <Product {...product} on:add-to-cart={addToCart} on:delete={deleteProduct} />
 {/each}
 
-<Modal>
-  <h1 slot="header">Hello my friend!</h1>
-  <p>This works :D</p>
-  <button slot="footer">Confirm</button>
-</Modal>
+<button on:click={showModalOnScreen}>Show Modal</button>
+
+{#if showModal}
+  <Modal on:cancel={cancelModal} on:close={closeModal}>
+    <h1 slot="header">Hello my friend!</h1>
+    <p>This works :D</p>
+    <!-- <button slot="footer" on:click={closeModal}>Confirm</button> -->
+  </Modal>
+{/if}
